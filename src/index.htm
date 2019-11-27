@@ -1,17 +1,44 @@
 <!doctype html>
 <html lang="en-US">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Coding Template</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="bundle.css">
 </head>
 
 <body>
-  <h1>hej</h1>
-  <h1>Webpack - TypeScript - Scss</h1>
-  <h2>TypeScript Hello World</h2>  
-  <div id="content"></div>
-    
+  <div class="jumbotron text-center">
+    <h1>Weather Station</h1>
+    <p>Resize this responsive page to see the effect!</p>
+    <button type="button" class="btn btn-primary">Hjem</button>
+    <button type="button" class="btn btn-info">Vejret udenfor</button>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h6>temp</h6>
+        <h3 style="display: inline;">21</h3>
+        <h6>pressure</h6>
+        <h5 style="display: inline;">997</h5>
+        <h6>humidity</h6>
+        <h5 style="display: inline;">96%</h5>
+      </div>
+
+    </div>
+
+    <div class="row">
+<h1>graf</h1>
+    </div>
+  </div>
+
+
   <script src="bundle.js"></script>
 </body>
+
 </html>
