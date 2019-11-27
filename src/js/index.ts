@@ -1,12 +1,20 @@
-interface Person {
-    firstName: string;
-    lastName: string;
+import axios, {
+    AxiosResponse,
+    AxiosError
+} from "../../node_modules/axios/index";
+
+interface IForecast {
+    temp: number,
+    pressure: number,
+    humidity: number
 }
 
-function greeter(person: Person): string {
-    return "Hello, " + person.firstName + " " + person.lastName;
-}
-let user: Person = { firstName: "John", lastName: "Doe" };
+let baseURI: string = "http://localhost:61565/api/Weathers";
 
-let element: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
-element.innerHTML = greeter(user);
+function GetCurrentWeather(): void {
+    let currentTempSpanElement: HTMLSpanElement = <HTMLSpanElement>document.getElementById("currentTemp");
+    let currentHumiditySpanElement: HTMLSpanElement = <HTMLSpanElement>document.getElementById("currentHumidity");
+    let currentPressureSpanElement: HTMLSpanElement = <HTMLSpanElement>document.getElementById("currentPressure");
+     
+}
+
