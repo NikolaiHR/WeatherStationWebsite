@@ -38,5 +38,12 @@ else {
 
 }
 
-let currentButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentWeatherButton");
-currentButton.addEventListener("click", GetCurrentWeather);
+//let currentButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentWeatherButton");
+//currentButton.addEventListener("click", GetCurrentWeather);
+
+function UpdateCurrentWeather(): void {
+setInterval(GetCurrentWeather, 10000)
+}
+
+GetCurrentWeather()
+UpdateCurrentWeather()
