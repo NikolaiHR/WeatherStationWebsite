@@ -46,7 +46,7 @@ function GetCurrentOutsideWeatherCondition(): void {
         .then(function (response: AxiosResponse): void {
             let jsonString: string = JSON.stringify(response.data);
             let splitWeatherConditionString: string = jsonString.split('"description":', 2)[1].split(',', 2)[0];
-            currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length-2);
+            currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length - 2);
         })
         .catch(function (error: AxiosError): void {
             currentWeatherConditionElement.innerHTML = error.message;
@@ -56,24 +56,24 @@ function GetCurrentOutsideWeatherCondition(): void {
 
 
 function GetCurrentOutsideWeatherTemperature(): void {
-    let currentOutsideWeatherTemperature : HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperature")
+    let currentOutsideWeatherTemperature: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperature");
     axios.get(ThirdPartyOneDayBaseURI)
-    .then(function (response: AxiosResponse): void{
-    
-    let JsonString:string = JSON.stringify(response.data)
-    console.log(JsonString)
-    let position1: number = JsonString.indexOf("\"temp\"")
-    let position1Over: number = JsonString.indexOf(",",position1)
-    let sub1: string = JsonString.substr(position1 + 7,position1Over - position1 - 7)
-    currentOutsideWeatherTemperature.innerHTML = sub1
-    
-}).catch(function (error: AxiosError): void {
-    currentOutsideWeatherTemperature.innerHTML = error.message;
-})}
+        .then(function (response: AxiosResponse): void {
+
+            let JsonString: string = JSON.stringify(response.data);
+            let position1: number = JsonString.indexOf("\"temp\"");
+            let position1Over: number = JsonString.indexOf(",", position1);
+            let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
+            currentOutsideWeatherTemperature.innerHTML = sub1;
+
+        }).catch(function (error: AxiosError): void {
+            currentOutsideWeatherTemperature.innerHTML = error.message;
+        })
+}
 
 
-let currentOutsideWeatherTemperatureButton:HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperature")
-currentOutsideWeatherTemperatureButton.addEventListener("click",GetCurrentOutsideWeatherTemperature);
+let currentOutsideWeatherTemperatureButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureButton");
+currentOutsideWeatherTemperatureButton.addEventListener("click", GetCurrentOutsideWeatherTemperature);
 
 let currentOutsideWeatherConditionButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherConditionButton");
 currentOutsideWeatherConditionButton.addEventListener("click", GetCurrentOutsideWeatherCondition);
