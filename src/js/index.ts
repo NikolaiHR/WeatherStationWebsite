@@ -53,6 +53,28 @@ function GetCurrentOutsideWeatherCondition(): void {
         })
 }
 
+
+
+function GetCurrentOutsideWeatherTemperature(): void {
+    let currentOutsideWeatherTemperature : HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperature")
+    axios.get(ThirdPartyOneDayBaseURI)
+    .then(function (response: AxiosResponse): void{
+    
+    let JsonString:string = JSON.stringify(response.data)
+    console.log(JsonString)
+    let position1: number = JsonString.indexOf("\"temp\"")
+    let position1Over: number = JsonString.indexOf(",",position1)
+    let sub1: string = JsonString.substr(position1 + 7,position1Over - position1 - 7)
+    currentOutsideWeatherTemperature.innerHTML = sub1
+    
+}).catch(function (error: AxiosError): void {
+    currentOutsideWeatherTemperature.innerHTML = error.message;
+})}
+
+
+let currentOutsideWeatherTemperatureButton:HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperature")
+currentOutsideWeatherTemperatureButton.addEventListener("click",GetCurrentOutsideWeatherTemperature);
+
 let currentOutsideWeatherConditionButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherConditionButton");
 currentOutsideWeatherConditionButton.addEventListener("click", GetCurrentOutsideWeatherCondition);
 
