@@ -64,6 +64,9 @@ weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/1.svg';
 else if (weatherDescription.toUpperCase().indexOf("SKY") !== -1) {
     weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/3.svg';
 }
+else if (weatherDescription.toUpperCase().indexOf("REGN") !== -1) {
+
+}
 
 
 weatherIcon += '" alt="">';
