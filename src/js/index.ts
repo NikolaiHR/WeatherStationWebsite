@@ -94,14 +94,14 @@ function GetCurrentOutsideWeatherTemperature(): void {
 //Ny
 function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
     let currentOutsideWeatherTemperatureThreeDays: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperatureThreeDays");
-    axios.get(ThirdPartyOneDayBaseURI)
+    axios.get(ThirdPartySixteenDaysBaseURI)
         .then(function (response: AxiosResponse): void {
 
             let JsonString: string = JSON.stringify(response.data);
             let position1: number = JsonString.indexOf("\"temp\"");
             let position1Over: number = JsonString.indexOf(",", position1);
             let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
-            currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1;
+            console.log ("sub1")
 
            let position2: number = JsonString.indexOf("\"temp\"",position1Over)
            let position2Over : number = JsonString.indexOf(",",position2)
@@ -111,6 +111,7 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
            let position3Over : number = JsonString.indexOf(",",position3)
            let sub3: string = JsonString.substr(position3 + 7,position3Over - position3 - 7)
 
+           currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + " " + sub2 + " " + sub3;
         }).catch(function (error: AxiosError): void {
             currentOutsideWeatherTemperatureThreeDays.innerHTML = error.message;
         })
@@ -137,16 +138,16 @@ function GetCurrentOutsideWeatherWindspeed(): void {
 let currentOutsideWeatherTemperatureButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureButton");
 currentOutsideWeatherTemperatureButton.addEventListener("click", GetCurrentOutsideWeatherTemperature);
 
-//Ny
-let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
-currentOutsideWeatherTemperatureThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherTemperatureThreeDays);
-//Ny
-
 let currentOutsideWeatherWindspeedButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherWindspeedButton");
 currentOutsideWeatherWindspeedButton.addEventListener("click", GetCurrentOutsideWeatherWindspeed);
 
 let currentOutsideWeatherConditionButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherConditionButton");
 currentOutsideWeatherConditionButton.addEventListener("click", GetCurrentOutsideWeatherCondition);
+
+
+let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
+currentOutsideWeatherTemperatureThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherTemperatureThreeDays);
+
 
 function UpdateCurrentIndoorWeather(): void {
     setInterval(GetCurrentIndoorWeather, 10000)
