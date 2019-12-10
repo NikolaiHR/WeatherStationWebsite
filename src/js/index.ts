@@ -11,6 +11,7 @@ interface IForecast {
 
 let baseURI: string = "http://localhost:61565/api/Weathers";
 let ThirdPartyOneDayBaseURI: string = "http://api.weatherbit.io/v2.0/current?key=49723e60fdf2450db46f0b67d9d152ea&&city=Roskilde&&lang=da";
+let ThirdPartySixteenDaysBaseURI: string = "http://api.weatherbit.io/v2.0/forecast/daily?key=49723e60fdf2450db46f0b67d9d152ea&&city=Roskilde&&lang=da&&days=16";
 
 function GetCurrentIndoorWeather(): void {
     let currentTempSpanElement: HTMLSpanElement = <HTMLSpanElement>document.getElementById("currentTemp");
