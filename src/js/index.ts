@@ -11,6 +11,7 @@ interface IForecast {
 
 let baseURI: string = "http://localhost:61565/api/Weathers";
 let ThirdPartyOneDayBaseURI: string = "http://api.weatherbit.io/v2.0/current?key=49723e60fdf2450db46f0b67d9d152ea&&city=Roskilde&&lang=da";
+let ThirdPartySixteenDaysBaseURI: string = "http://api.weatherbit.io/v2.0/forecast/daily?key=49723e60fdf2450db46f0b67d9d152ea&&city=Roskilde&&lang=da&&days=16";
 
 function GetCurrentIndoorWeather(): void {
     let currentTempSpanElement: HTMLSpanElement = <HTMLSpanElement>document.getElementById("currentTemp");
@@ -46,6 +47,7 @@ function GetCurrentOutsideWeatherCondition(): void {
         .then(function (response: AxiosResponse): void {
             let jsonString: string = JSON.stringify(response.data);
             let splitWeatherConditionString: string = jsonString.split('"description":', 2)[1].split(',', 2)[0];
+            ChooseWeatherIcon(splitWeatherConditionString);
             currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length - 2);
         })
         .catch(function (error: AxiosError): void {
@@ -53,6 +55,22 @@ function GetCurrentOutsideWeatherCondition(): void {
         })
 }
 
+function ChooseWeatherIcon(weatherDescription: string): void {
+    let currentOutsideWeatherConditionIconElement: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherConditionIcon");
+let weatherIcon: string = '<img class="img-fluid" src="';
+    if (weatherDescription.toUpperCase().indexOf("SOL") !== -1) {
+weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/1.svg';
+}
+else if (weatherDescription.toUpperCase().indexOf("SKY") !== -1) {
+    weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/3.svg';
+}
+
+
+weatherIcon += '" alt="">';
+
+currentOutsideWeatherConditionIconElement.innerHTML = weatherIcon;
+
+}
 
 
 function GetCurrentOutsideWeatherTemperature(): void {
@@ -82,5 +100,5 @@ function UpdateCurrentIndoorWeather(): void {
     setInterval(GetCurrentIndoorWeather, 10000)
 }
 
-GetCurrentIndoorWeather()
-UpdateCurrentIndoorWeather()
+//GetCurrentIndoorWeather()
+//UpdateCurrentIndoorWeather()
