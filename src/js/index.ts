@@ -111,7 +111,7 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
            let position3Over : number = JsonString.indexOf(",",position3)
            let sub3: string = JsonString.substr(position3 + 7,position3Over - position3 - 7)
 
-           currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + " " + sub2 + " " + sub3;
+           currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
         }).catch(function (error: AxiosError): void {
             currentOutsideWeatherTemperatureThreeDays.innerHTML = error.message;
         })
