@@ -138,24 +138,20 @@ function GetCurrentOutsideWeatherWindspeed(): void {
         })
 }
 
-
-let currentOutsideWeatherTemperatureButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureButton");
-currentOutsideWeatherTemperatureButton.addEventListener("click", GetCurrentOutsideWeatherTemperature);
-
-let currentOutsideWeatherWindspeedButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherWindspeedButton");
-currentOutsideWeatherWindspeedButton.addEventListener("click", GetCurrentOutsideWeatherWindspeed);
-
-let currentOutsideWeatherConditionButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherConditionButton");
-currentOutsideWeatherConditionButton.addEventListener("click", GetCurrentOutsideWeatherCondition);
-
-
 let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
 currentOutsideWeatherTemperatureThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherTemperatureThreeDays);
 
 
-function UpdateCurrentIndoorWeather(): void {
-    setInterval(GetCurrentIndoorWeather, 10000)
+function UpdateCurrentWeather(): void {
+    setInterval(GetCurrentIndoorWeather, 10000);
+    setInterval(GetCurrentOutsideWeatherTemperature, 10000);
+    setInterval(GetCurrentOutsideWeatherWindspeed, 10000);
+    setInterval(GetCurrentOutsideWeatherCondition, 10000);
+
 }
 
-GetCurrentIndoorWeather()
-UpdateCurrentIndoorWeather()
+GetCurrentIndoorWeather();
+GetCurrentOutsideWeatherTemperature();
+GetCurrentOutsideWeatherWindspeed();
+GetCurrentOutsideWeatherCondition();
+UpdateCurrentWeather();
