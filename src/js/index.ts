@@ -106,7 +106,6 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
             let position1: number = JsonString.indexOf("\"temp\"");
             let position1Over: number = JsonString.indexOf(",", position1);
             let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
-            console.log("sub1")
 
             let position2: number = JsonString.indexOf("\"temp\"", position1Over)
             let position2Over: number = JsonString.indexOf(",", position2)
