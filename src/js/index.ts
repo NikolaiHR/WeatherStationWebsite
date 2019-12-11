@@ -65,7 +65,13 @@ function ChooseWeatherIcon(weatherDescription: string): void {
         weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/3.svg';
     }
     else if (weatherDescription.toUpperCase().indexOf("REGN") !== -1) {
-
+        weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/63.svg';
+    }
+    else if (weatherDescription.toUpperCase().indexOf("SNE") !== -1) {
+        weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/73.svg';
+    }
+    else if (weatherDescription.toUpperCase().indexOf("TÅGE") !== -1) {
+        weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/45.svg';
     }
 
 
@@ -102,7 +108,7 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
             let position1: number = JsonString.indexOf("\"temp\"");
             let position1Over: number = JsonString.indexOf(",", position1);
             let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
-            console.log ("sub1")
+            console.log("sub1")
 
             let position2: number = JsonString.indexOf("\"temp\"", position1Over)
             let position2Over: number = JsonString.indexOf(",", position2)
@@ -112,7 +118,7 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
             let position3Over: number = JsonString.indexOf(",", position3)
             let sub3: string = JsonString.substr(position3 + 7, position3Over - position3 - 7)
 
-           currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
+            currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
         }).catch(function (error: AxiosError): void {
             currentOutsideWeatherTemperatureThreeDays.innerHTML = error.message;
         })
