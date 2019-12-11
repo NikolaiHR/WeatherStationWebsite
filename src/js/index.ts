@@ -74,11 +74,9 @@ function ChooseWeatherIcon(weatherDescription: string): void {
         weatherIcon += 'https://www.dmi.dk/fileadmin/templates/img/45.svg';
     }
 
-
     weatherIcon += '" alt="">';
 
     currentOutsideWeatherConditionIconElement.innerHTML = weatherIcon;
-
 }
 
 
