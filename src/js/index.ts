@@ -40,6 +40,9 @@ function GetCurrentIndoorWeather(): void {
 
 }
 
+
+
+
 function GetCurrentOutsideWeatherCondition(): void {
     let currentWeatherConditionElement: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherCondition");
 
