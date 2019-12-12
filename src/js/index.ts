@@ -40,19 +40,15 @@ function GetCurrentIndoorWeather(): void {
 
 }
 
-function GetCurrentOutsideWeatherCondition(): void {
+function GetCurrentOutsideWeatherCondition(jsonString: string): void {
     let currentWeatherConditionElement: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherCondition");
 
-    axios.get(ThirdPartyOneDayBaseURI)
-        .then(function (response: AxiosResponse): void {
-            let jsonString: string = JSON.stringify(response.data);
+    
+            
             let splitWeatherConditionString: string = jsonString.split('"description":', 2)[1].split(',', 2)[0];
             ChooseWeatherIcon(splitWeatherConditionString);
             currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length - 2);
-        })
-        .catch(function (error: AxiosError): void {
-            currentWeatherConditionElement.innerHTML = error.message;
-        })
+        
 }
 
 function ChooseWeatherIcon(weatherDescription: string): void {
@@ -80,20 +76,17 @@ function ChooseWeatherIcon(weatherDescription: string): void {
 }
 
 
-function GetCurrentOutsideWeatherTemperature(): void {
-    let currentOutsideWeatherTemperature: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperature");
-    axios.get(ThirdPartyOneDayBaseURI)
-        .then(function (response: AxiosResponse): void {
+function GetCurrentOutsideWeatherTemperature(JsonString: string, currentOutsideWeatherTemperature: HTMLDivElement): void {
 
-            let JsonString: string = JSON.stringify(response.data);
+    
+
+            
             let position1: number = JsonString.indexOf("\"temp\"");
             let position1Over: number = JsonString.indexOf(",", position1);
             let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
             currentOutsideWeatherTemperature.innerHTML = sub1;
 
-        }).catch(function (error: AxiosError): void {
-            currentOutsideWeatherTemperature.innerHTML = error.message;
-        })
+        
 }
 
 
@@ -146,20 +139,15 @@ function GetCurrentOutsideWeatherWindspeedThreeDays(): void {
 }
 
 
-function GetCurrentOutsideWeatherWindspeed(): void {
+function GetCurrentOutsideWeatherWindspeed(JsonString: string): void {
     let currentOutsideWeatherWindspeed: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherWindspeed");
-    axios.get(ThirdPartyOneDayBaseURI)
-        .then(function (response: AxiosResponse): void {
-
-            let JsonString: string = JSON.stringify(response.data);
+    
             let position1: number = JsonString.indexOf("\"wind_spd\"");
             let position1Over: number = JsonString.indexOf(",", position1);
             let sub1: string = JsonString.substr(position1 + 11, position1Over - position1 - 11);
             currentOutsideWeatherWindspeed.innerHTML = sub1;
 
-        }).catch(function (error: AxiosError): void {
-            currentOutsideWeatherWindspeed.innerHTML = error.message;
-        })
+        
 }
 
 let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
@@ -168,16 +156,31 @@ currentOutsideWeatherTemperatureThreeDaysButton.addEventListener("click", GetCur
 let currentOutsideWeatherWindspeedThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherWindspeedThreeDaysButton");
 currentOutsideWeatherWindspeedThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherWindspeedThreeDays);
 
+
+function CallThirdPartyApiForCurrentWeather(): void {
+    let currentOutsideWeatherTemperature: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherTemperature");
+
+    axios.get(ThirdPartyOneDayBaseURI)
+        .then(function (response: AxiosResponse): void {
+            let JsonString: string = JSON.stringify(response.data);
+            GetCurrentOutsideWeatherTemperature(JsonString, currentOutsideWeatherTemperature);
+            GetCurrentOutsideWeatherWindspeed(JsonString);
+            GetCurrentOutsideWeatherCondition(JsonString);
+
+
+        })
+        .catch(function (error: AxiosError): void {
+            currentOutsideWeatherTemperature.innerHTML = error.message;
+        })
+}
+
+
 function UpdateCurrentWeather(): void {
     setInterval(GetCurrentIndoorWeather, 10000);
-    setInterval(GetCurrentOutsideWeatherTemperature, 10000);
-    setInterval(GetCurrentOutsideWeatherWindspeed, 10000);
-    setInterval(GetCurrentOutsideWeatherCondition, 10000);
+    setInterval(CallThirdPartyApiForCurrentWeather, 10000)
 
 }
 
 GetCurrentIndoorWeather();
-GetCurrentOutsideWeatherTemperature();
-GetCurrentOutsideWeatherWindspeed();
-GetCurrentOutsideWeatherCondition();
+CallThirdPartyApiForCurrentWeather();
 UpdateCurrentWeather();
