@@ -40,9 +40,6 @@ function GetCurrentIndoorWeather(): void {
 
 }
 
-
-
-
 function GetCurrentOutsideWeatherCondition(): void {
     let currentWeatherConditionElement: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherCondition");
 
@@ -124,6 +121,30 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
         })
 }
 
+function GetCurrentOutsideWeatherWindspeedThreeDays(): void {
+    let currentOutsideWeatherWindspeedThreeDays: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherWindspeedThreeDays");
+    axios.get(ThirdPartySixteenDaysBaseURI)
+        .then(function (response: AxiosResponse): void {
+
+            let JsonString: string = JSON.stringify(response.data);
+            let position1: number = JsonString.indexOf("\"wind_spd\"");
+            let position1Over: number = JsonString.indexOf(",", position1);
+            let sub1: string = JsonString.substr(position1 + 11, position1Over - position1 - 11);
+
+            let position2: number = JsonString.indexOf("\"wind_spd\"", position1Over)
+            let position2Over: number = JsonString.indexOf(",", position2)
+            let sub2: string = JsonString.substr(position2 + 11, position2Over - position2 - 11)
+
+            let position3: number = JsonString.indexOf("\"wind_spd\"", position2Over)
+            let position3Over: number = JsonString.indexOf(",", position3)
+            let sub3: string = JsonString.substr(position3 + 11, position3Over - position3 - 11)
+
+            currentOutsideWeatherWindspeedThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
+        }).catch(function (error: AxiosError): void {
+            currentOutsideWeatherWindspeedThreeDays.innerHTML = error.message;
+        })
+}
+
 
 function GetCurrentOutsideWeatherWindspeed(): void {
     let currentOutsideWeatherWindspeed: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherWindspeed");
@@ -144,6 +165,8 @@ function GetCurrentOutsideWeatherWindspeed(): void {
 let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
 currentOutsideWeatherTemperatureThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherTemperatureThreeDays);
 
+let currentOutsideWeatherWindspeedThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherWindspeedThreeDaysButton");
+currentOutsideWeatherWindspeedThreeDaysButton.addEventListener("click", GetCurrentOutsideWeatherWindspeedThreeDays);
 
 function UpdateCurrentWeather(): void {
     setInterval(GetCurrentIndoorWeather, 10000);
