@@ -43,12 +43,12 @@ function GetCurrentIndoorWeather(): void {
 function GetCurrentOutsideWeatherCondition(jsonString: string): void {
     let currentWeatherConditionElement: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherCondition");
 
-    
-            
-            let splitWeatherConditionString: string = jsonString.split('"description":', 2)[1].split(',', 2)[0];
-            ChooseWeatherIcon(splitWeatherConditionString);
-            currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length - 2);
-        
+
+
+    let splitWeatherConditionString: string = jsonString.split('"description":', 2)[1].split(',', 2)[0];
+    ChooseWeatherIcon(splitWeatherConditionString);
+    currentWeatherConditionElement.innerHTML = splitWeatherConditionString.substring(1, splitWeatherConditionString.length - 2);
+
 }
 
 function ChooseWeatherIcon(weatherDescription: string): void {
@@ -78,15 +78,15 @@ function ChooseWeatherIcon(weatherDescription: string): void {
 
 function GetCurrentOutsideWeatherTemperature(JsonString: string, currentOutsideWeatherTemperature: HTMLDivElement): void {
 
-    
 
-            
-            let position1: number = JsonString.indexOf("\"temp\"");
-            let position1Over: number = JsonString.indexOf(",", position1);
-            let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
-            currentOutsideWeatherTemperature.innerHTML = sub1;
 
-        
+
+    let position1: number = JsonString.indexOf("\"temp\"");
+    let position1Over: number = JsonString.indexOf(",", position1);
+    let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
+    currentOutsideWeatherTemperature.innerHTML = sub1;
+
+
 }
 
 
@@ -107,8 +107,12 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
             let position3: number = JsonString.indexOf("\"temp\"", position2Over)
             let position3Over: number = JsonString.indexOf(",", position3)
             let sub3: string = JsonString.substr(position3 + 7, position3Over - position3 - 7)
-
-            currentOutsideWeatherTemperatureThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
+            let threeDayForecastTemp: string = "<ul>";
+            threeDayForecastTemp += "<li>" + "Dag 1: " + sub1 + "</li>";
+            threeDayForecastTemp += "<li>" + "Dag 2: " + sub2 + "</li>";
+            threeDayForecastTemp += "<li>" + "Dag 3: " + sub3 + "</li>";
+            threeDayForecastTemp += "</ul>";
+            currentOutsideWeatherTemperatureThreeDays.innerHTML = threeDayForecastTemp;
         }).catch(function (error: AxiosError): void {
             currentOutsideWeatherTemperatureThreeDays.innerHTML = error.message;
         })
@@ -132,22 +136,29 @@ function GetCurrentOutsideWeatherWindspeedThreeDays(): void {
             let position3Over: number = JsonString.indexOf(",", position3)
             let sub3: string = JsonString.substr(position3 + 11, position3Over - position3 - 11)
 
-            currentOutsideWeatherWindspeedThreeDays.innerHTML = sub1 + ", " + sub2 + ", " + sub3;
+            let threeDayForecastWindspeed: string = "<ul>";
+            threeDayForecastWindspeed += "<li>" + "Dag 1: " + sub1 + "</li>";
+            threeDayForecastWindspeed += "<li>" + "Dag 2: " + sub2 + "</li>";
+            threeDayForecastWindspeed += "<li>" + "Dag 3: " + sub3 + "</li>";
+            threeDayForecastWindspeed += "</ul>";
+            currentOutsideWeatherWindspeedThreeDays.innerHTML = threeDayForecastWindspeed;
         }).catch(function (error: AxiosError): void {
             currentOutsideWeatherWindspeedThreeDays.innerHTML = error.message;
         })
 }
 
 
+
+
 function GetCurrentOutsideWeatherWindspeed(JsonString: string): void {
     let currentOutsideWeatherWindspeed: HTMLDivElement = <HTMLDivElement>document.getElementById("currentOutsideWeatherWindspeed");
-    
-            let position1: number = JsonString.indexOf("\"wind_spd\"");
-            let position1Over: number = JsonString.indexOf(",", position1);
-            let sub1: string = JsonString.substr(position1 + 11, position1Over - position1 - 11);
-            currentOutsideWeatherWindspeed.innerHTML = sub1;
 
-        
+    let position1: number = JsonString.indexOf("\"wind_spd\"");
+    let position1Over: number = JsonString.indexOf(",", position1);
+    let sub1: string = JsonString.substr(position1 + 11, position1Over - position1 - 11);
+    currentOutsideWeatherWindspeed.innerHTML = sub1;
+
+
 }
 
 let currentOutsideWeatherTemperatureThreeDaysButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("currentOutsideWeatherTemperatureThreeDaysButton");
