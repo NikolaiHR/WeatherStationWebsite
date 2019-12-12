@@ -21,9 +21,9 @@ function GetCurrentIndoorWeather(): void {
     axios.get<IForecast>(baseURI + "/Current")
         .then(function (response: AxiosResponse): void {
             let currentForecast: IForecast = response.data;
-            currentTempSpanElement.innerHTML = currentForecast.temp.toString();
-            currentHumiditySpanElement.innerHTML = currentForecast.humidity.toString();
-            currentPressureSpanElement.innerHTML = currentForecast.pressure.toString();
+            currentTempSpanElement.innerHTML = currentForecast.temp.toString() + "ºC";
+            currentHumiditySpanElement.innerHTML = currentForecast.humidity.toString() + "%";
+            currentPressureSpanElement.innerHTML = currentForecast.pressure.toString() + "hPa";
         })
         .catch(function (error: AxiosError): void {
             if (error.response) {
@@ -78,13 +78,10 @@ function ChooseWeatherIcon(weatherDescription: string): void {
 
 function GetCurrentOutsideWeatherTemperature(JsonString: string, currentOutsideWeatherTemperature: HTMLDivElement): void {
 
-
-
-
     let position1: number = JsonString.indexOf("\"temp\"");
     let position1Over: number = JsonString.indexOf(",", position1);
     let sub1: string = JsonString.substr(position1 + 7, position1Over - position1 - 7);
-    currentOutsideWeatherTemperature.innerHTML = sub1;
+    currentOutsideWeatherTemperature.innerHTML = sub1 + "ºC";
 
 
 }
@@ -108,9 +105,9 @@ function GetCurrentOutsideWeatherTemperatureThreeDays(): void {
             let position3Over: number = JsonString.indexOf(",", position3)
             let sub3: string = JsonString.substr(position3 + 7, position3Over - position3 - 7)
             let threeDayForecastTemp: string = "<ul>";
-            threeDayForecastTemp += "<li>" + "Dag 1: " + sub1 + "</li>";
-            threeDayForecastTemp += "<li>" + "Dag 2: " + sub2 + "</li>";
-            threeDayForecastTemp += "<li>" + "Dag 3: " + sub3 + "</li>";
+            threeDayForecastTemp += "<li>" + "Dag 1: " + sub1 + "ºC" + "</li>";
+            threeDayForecastTemp += "<li>" + "Dag 2: " + sub2 + "ºC" + "</li>";
+            threeDayForecastTemp += "<li>" + "Dag 3: " + sub3 + "ºC" + "</li>";
             threeDayForecastTemp += "</ul>";
             currentOutsideWeatherTemperatureThreeDays.innerHTML = threeDayForecastTemp;
         }).catch(function (error: AxiosError): void {
@@ -137,9 +134,9 @@ function GetCurrentOutsideWeatherWindspeedThreeDays(): void {
             let sub3: string = JsonString.substr(position3 + 11, position3Over - position3 - 11)
 
             let threeDayForecastWindspeed: string = "<ul>";
-            threeDayForecastWindspeed += "<li>" + "Dag 1: " + sub1 + "</li>";
-            threeDayForecastWindspeed += "<li>" + "Dag 2: " + sub2 + "</li>";
-            threeDayForecastWindspeed += "<li>" + "Dag 3: " + sub3 + "</li>";
+            threeDayForecastWindspeed += "<li>" + "Dag 1: " + sub1 + "m/s" + "</li>";
+            threeDayForecastWindspeed += "<li>" + "Dag 2: " + sub2 + "m/s" + "</li>";
+            threeDayForecastWindspeed += "<li>" + "Dag 3: " + sub3 + "m/s" + "</li>";
             threeDayForecastWindspeed += "</ul>";
             currentOutsideWeatherWindspeedThreeDays.innerHTML = threeDayForecastWindspeed;
         }).catch(function (error: AxiosError): void {
@@ -156,7 +153,7 @@ function GetCurrentOutsideWeatherWindspeed(JsonString: string): void {
     let position1: number = JsonString.indexOf("\"wind_spd\"");
     let position1Over: number = JsonString.indexOf(",", position1);
     let sub1: string = JsonString.substr(position1 + 11, position1Over - position1 - 11);
-    currentOutsideWeatherWindspeed.innerHTML = sub1;
+    currentOutsideWeatherWindspeed.innerHTML = sub1 + "m/s";
 
 
 }

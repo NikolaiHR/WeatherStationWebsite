@@ -17,58 +17,63 @@
   </div>
 
   <div class="container">
-    <h1>Indemiljø</h1>
     <div class="row">
-      <div class="col-sm-12">
-        <h3>Her og nu</h3>
+      <div class="col-sm-6">
+        <h1>Indemiljø</h1>
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Her og nu</h3>
+            <br>
+            <h6>Temperatur</h6>
+            <span id="currentTemp"></span>
+            <h6>Fugtighed</h6>
+            <span id="currentHumidity"></span>
+            <h6>Lufttryk</h6>
+            <span id="currentPressure"></span>
+          </div>
+
+        </div>
         <br>
-        <h6>Temperatur</h6>
-        <span id="currentTemp"></span>
-        <h6>Fugtighed</h6>
-        <span id="currentHumidity"></span>
-        <h6>Lufttryk</h6>
-        <span id="currentPressure"></span>
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Graf</h3>
+          </div>
+        </div>
       </div>
+      <div class="col-sm-6">
+        <h1>Vejret udenfor</h1>
+        <br>
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>Her og nu</h3>
+            <h5>Temperatur</h5>
+            <div id="currentOutsideWeatherTemperature"></div>
 
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Graf</h3>
-      </div>
-    </div>
-    <br>
-    <h1>Vejret udenfor</h1>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>Her og nu</h3>
-        <h5>Temperatur</h5>
-        <div id="currentOutsideWeatherTemperature"></div>
- 
-        <h5>Vindstyrke</h5>
-        <div id="currentOutsideWeatherWindspeed"></div>
-      
-        <h5>Vejrforhold</h5>
-        
-        <div class="smallIcon" id="currentOutsideWeatherConditionIcon"></div>
-        <div id="currentOutsideWeatherCondition"></div>
-        
+            <h5>Vindstyrke</h5>
+            <div id="currentOutsideWeatherWindspeed"></div>
 
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-sm-12">
-        <h3>3 dages vejrudsigt</h3>
-        <h5>Temperatur</h5>
-        <div id="currentOutsideWeatherTemperatureThreeDays"></div>
-        <button class="btn btn-info" id="currentOutsideWeatherTemperatureThreeDaysButton">Get Temperatur</button>
-        <h5>Vindstyrke</h5>
-        <div id="currentOutsideWeatherWindspeedThreeDays"></div>
-        <button class="btn btn-info" id="currentOutsideWeatherWindspeedThreeDaysButton">Get Vindstyrke</button>
-        
+            <h5>Vejrforhold</h5>
 
+            <div class="smallIcon" id="currentOutsideWeatherConditionIcon"></div>
+            <div id="currentOutsideWeatherCondition"></div>
+
+
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-6">
+            <h3>3 dages vejrudsigt</h3>
+            <h5>Temperatur</h5>
+            <div id="currentOutsideWeatherTemperatureThreeDays"></div>
+            <button class="btn btn-info" id="currentOutsideWeatherTemperatureThreeDaysButton">Get Temperatur</button>
+            <h5>Vindstyrke</h5>
+            <div id="currentOutsideWeatherWindspeedThreeDays"></div>
+            <button class="btn btn-info" id="currentOutsideWeatherWindspeedThreeDaysButton">Get Vindstyrke</button>
+            <br>
+            <br>
+          </div>
+        </div>
       </div>
     </div>
   </div>
